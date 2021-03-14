@@ -13,6 +13,7 @@ let pokemonList = [
     height = 4,
     type = 'Ground',
     HP = 50,
+    Attack = 50,
     Defense = 95,
     Speed = 35,
   }
