@@ -1,42 +1,46 @@
-<link rel="stylesheet" type="text/css" href=css/styles.css>
 let pokemonList = [
   {
     name: 'Ninetales',
     height: 10,
     type: ['Fire'],
     HP: 73,
-    Attack: 76,
-    Defense: 75,
-    Speed: 100,
+    attack: 76,
+    defense: 75,
+    speed: 100,
   },
   {
     name: 'Cubone',
     height: 4,
     type: ['Ground'],
     HP: 50,
-    Attack: 50,
-    Defense: 95,
-    Speed: 35,
+    attack: 50,
+    defense: 95,
+    speed: 35,
   },
   {
     name: 'Wobbuffet',
     height: 13,
     type: ['Psychic'],
     HP: 190,
-    Attack: 33,
-    Defense: 58,
-    Speed: 33,
+    attack: 33,
+    defense: 58,
+    speed: 33,
   },
   {
     name: 'Taillow',
     height: 3,
     type: ['Flying', 'Normal'],
     HP: 40,
-    Attack: 55,
-    Defense: 30,
-    Speed: 85,
+    attack: 55,
+    defense: 30,
+    speed: 85,
   },
-]
-for (let i = 0; i < pokemonList.length; i++) {
-  document.write(pokemonList[i].name, ' (height: ', pokemonList[i].height, ' decimeters)')
-}
+];
+//writes the names, heights and speeds of the objects in pokemonList array
+for (let i = 0; i < pokemonList.length; i++){
+  document.write(pokemonList[i].name, ' (height: ' + pokemonList[i].height + ' decimeters)',' (speed: ' + pokemonList[i].speed, ') ', );
+//conditional comment on pokemon of speed 100 or greater
+  if (pokemonList[i].speed >= 100){
+      document.write(' - Wow, that\'s fast!');
+    }
+  }
