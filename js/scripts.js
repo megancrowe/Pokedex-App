@@ -38,9 +38,10 @@ let pokemonList = [
 ];
 //writes the names, heights and speeds of the objects in pokemonList array
 for (let i = 0; i < pokemonList.length; i++){
-  document.write(pokemonList[i].name, ' (height: ' + pokemonList[i].height + ' cm)',' (speed: ' + pokemonList[i].speed, ') ', );
+  document.write(pokemonList[i].name, ' (height: ' + pokemonList[i].height + 'cm)',' (speed: ' + pokemonList[i].speed, ')',);
 //conditional comment on pokemon of speed 100 or greater
   if (pokemonList[i].speed >= 100){
-      document.write(' - Wow, that\'s fast!');
+      document.write(' - Wow, that\'s fast!</br>');
     }
+  else {document.write('</br>')}
   }
