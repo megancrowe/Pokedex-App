@@ -1,4 +1,4 @@
-const pokemonRepository = (function () {
+const pokemonRepo = (function () {
     let pokemonList = [
       {
         name: 'Ninetales',
