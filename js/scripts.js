@@ -58,4 +58,4 @@ function getAll(pokemon) {
   }
   else {document.write('</br>')}
 };
-pokemonList.forEach(getAll)
+pokemonList.getAll().forEach
