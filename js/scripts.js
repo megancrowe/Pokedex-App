@@ -50,7 +50,7 @@ const pokemonRepository = (function () {
   })();
 
 //writes the names, heights and speeds of the objects in pokemonList array
-function displayStats(pokemon) {
+function getAll(pokemon) {
   document.write(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
   //conditional comment on pokemon of speed 100 or greater
   if (pokemon.speed >= 100){
@@ -58,4 +58,4 @@ function displayStats(pokemon) {
   }
   else {document.write('</br>')}
 };
-pokemonList.forEach(displayStats)
+pokemonList.forEach(getAll)
