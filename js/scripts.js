@@ -1,5 +1,4 @@
-(function () {
-  let pokemonRepository = {
+const pokemonRepository = (function () {
     let pokemonList = [
       {
         name: 'Ninetales',
@@ -36,20 +35,19 @@
         attack: 55,
         defense: 30,
         speed: 85,
-      },
-    ],
-    function(add pokemon) {
+      }
+    ]
+    function addPokemon () {
         pokemonList.push(pokemon);
-      },
-    function (getAll) {
+      }
+    function getAll () {
       return pokemonList;
     }
     return {
       getAll = getAll,
       add = add,
-    },
-  },
-})();
+    }
+  })();
 
 //writes the names, heights and speeds of the objects in pokemonList array
 function displayStats(pokemon) {
