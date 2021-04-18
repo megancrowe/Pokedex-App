@@ -39,10 +39,10 @@ let pokemonRepo = (function () {
     }
   ]
   function addPokemon (item) {
-    if(typeof item === ""){
-    alert ("Please enter a pokemon");
+    if(typeof item === "object"){
+      pokemonList.push(item);
     }
-    else pokemonList.push(item)
+    else alert ("Please enter a valid Pokemon")
   }
   function getAll () {
     return pokemonList;
