@@ -5,3 +5,16 @@ body {
   flex-direction: column;
   text-align: center;
 }
+button {
+  border: blue;
+}
+
+ul {
+  list-style: none;
+}
+
+.pokemon-button {
+  background-color: #3c505c;
+  color: white;
+  padding: 1px, 1px, 1px, 1px;
+}

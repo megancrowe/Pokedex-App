@@ -1,5 +1,4 @@
-let pokemonRepo = (function () {
-  let pokemon = ''
+var pokemonRepo = (function () {
   let pokemonList = [
     {
       name: 'Ninetales',
@@ -38,24 +37,53 @@ let pokemonRepo = (function () {
       speed: 85,
     }
   ]
+
   function addPokemon (item) {
-    if(typeof item === "object"){
+    if(typeof item === 'object'){
       pokemonList.push(item);
     }
-    else alert ("Please enter a valid Pokemon")
+    else alert ('Please enter a valid Pokemon')
   }
+
   function getAll () {
     return pokemonList;
   }
+
   return {
     getAll: getAll,
     addPokemon: addPokemon,
-  }
-}());
+    },
+  }());
+  
+  //function addListItem(pokemon)
+  pokemonRepo.getAll().forEach(function (pokemon) {
+    document.write(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
+      //conditional comment on pokemon of speed 100 or greater
+      if (pokemon.speed >= 100) {
+        document.write(' - wow, that\'s fast!</br>');
+      }
+      else {
+      document.write('</br>')
+      }
+  });
+    
+    /*let pokemonList = document.querySelector('.pokemon-ul');
+    let listPokemon = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('pokemon-button');
+    listPokemon.appendChild(button);
+    pokemonList.appendChild(listPokemon);
+    });
+    */
+  
+
+//pokemonRepo.getAll().forEach(function (pokemon) {
+//  pokemonRepo.addListItem(pokemon);
+//});
 
 
-//writes the names, heights and speeds of the objects in pokemonList array
-pokemonRepo.getAll().forEach(function(pokemon) {  
+/*//writes the names, heights and speeds of the objects in pokemonList array
   document.write(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
     //conditional comment on pokemon of speed 100 or greater
     if (pokemon.speed >= 100) {
@@ -65,3 +93,4 @@ pokemonRepo.getAll().forEach(function(pokemon) {
       document.write('</br>')
     }
 });
+*/
