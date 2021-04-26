@@ -37,28 +37,41 @@ let pokemonRepo = (function () {
       speed: 85,
     }
   ]
-
-    //function to show details of list item
-    function showDetails (pokemon) {
-      console.log(pokemon);
-    }
   
   //function to add list item
   function addListItem (pokemon) {
     let pokemonList = document.querySelector('.pokemon-ul');
     let listPokemon = document.createElement('li');
+
     //create pokemon button
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('pokemon-button');
+
     //append pokemon button to HTML
     listPokemon.appendChild(button);
     pokemonList.appendChild(listPokemon);
+
     //event listener for button click
-    pokemon-button.addEventListener('click', function showDetails(pokemon) {
+    pokemon-button.addEventListener('click', function () {
+      showDetails(pokemon);
     });
   };
 
+    //function to show details of list item
+    function showDetails (pokemon) {
+      console.log(pokemon.name);
+      /*
+      document.write(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
+      //conditional comment on pokemon of speed 100 or greater
+      if (pokemon.speed >= 100) {
+        document.write(' - wow, that\'s fast!</br>');
+      }
+      else {
+        document.write('</br>')
+      }
+      */
+  }
 
   //function to add Pokemon to repo
   function addPokemon (item) {
@@ -87,13 +100,5 @@ pokemonRepo.getAll().forEach(function(pokemon) {
 });
 
 /*
-  document.write(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
-    //conditional comment on pokemon of speed 100 or greater
-    if (pokemon.speed >= 100) {
-      document.write(' - wow, that\'s fast!</br>');
-    }
-    else {
-      document.write('</br>')
-    }
-});
+);
 */
