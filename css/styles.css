@@ -1,5 +1,7 @@
-font-family: Cutive Mono;
-font-family: VT323;
+font-family {
+  Cutive Mono; 
+  VT323;
+}
 
 :root {  
   --pokemon-color-blue: #3B4CCA;
