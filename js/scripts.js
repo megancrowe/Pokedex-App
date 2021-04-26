@@ -60,12 +60,11 @@ let pokemonRepo = (function () {
 
     //function to show details of list item
     function showDetails (pokemon) {
-      console.log(pokemon.name);
+      console.log(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
       /*
-      document.write(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
       //conditional comment on pokemon of speed 100 or greater
-      if (pokemon.speed >= 100) {
-        document.write(' - wow, that\'s fast!</br>');
+      (if (pokemon.speed >= 100) {
+        console.log(' - wow, that\'s fast!</br>');
       }
       else {
         document.write('</br>')
@@ -100,5 +99,7 @@ pokemonRepo.getAll().forEach(function(pokemon) {
 });
 
 /*
-);
+document.querySelector('.show-more').addEventListener('click', function () {
+  document.querySelector('.additional-information')
+    .classList.toggle('is-visible');
 */
