@@ -38,23 +38,34 @@ let pokemonRepo = (function () {
     }
   ]
 
+    //function to show details of list item
+    function showDetails (pokemon) {
+      console.log(pokemon);
+    }
+  
   //function to add list item
   function addListItem (pokemon) {
     let pokemonList = document.querySelector('.pokemon-ul');
     let listPokemon = document.createElement('li');
+    //create pokemon button
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('pokemon-button');
+    //append pokemon button to HTML
     listPokemon.appendChild(button);
     pokemonList.appendChild(listPokemon);
+    //event listener for button click
+    pokemon-button.addEventListener('click', function showDetails(pokemon) {
+    });
   };
+
 
   //function to add Pokemon to repo
   function addPokemon (item) {
     if(typeof item === ""){
     alert ("Please enter a pokemon");
     }
-    else repo.push(item)
+    else repo.push(item);
   }
 
   //function to return all Pokemon in repo
@@ -74,12 +85,6 @@ let pokemonRepo = (function () {
 pokemonRepo.getAll().forEach(function(pokemon) {  
   pokemonRepo.addListItem(pokemon);
 });
-
-/*
-pokemonRepo.getAll().forEach(function (pokemon) {
-  pokemonRepo.addListItem(pokemon);
-});
-*/
 
 /*
   document.write(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
