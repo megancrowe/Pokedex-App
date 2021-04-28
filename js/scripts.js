@@ -6,7 +6,6 @@ var pokemonRepo = (function () {
   function add (pokemon) {
     if (typeof pokemon === 'object') {
       repo.push (pokemon);
-      console.log ('Pokemon has been added to Pokedex');
     } else {
       console.log ('Pokemon is not correctly entered');
     }
@@ -35,13 +34,28 @@ var pokemonRepo = (function () {
     button.addEventListener('click', function (event) {
       showDetails(pokemon);
     });
-  };
+  }
 
+  //show loading message function
+  function toggleLoadingMessage() {
+    //search document for .loading-message class
+    let loadingMessageH2 = document.querySelector('.loading-message')
+
+    //create heading for loading message
+    let loadingMessage = document.createElement('<h2></h2');
+    loadingMessage.innerText = 'loading...';
+
+    //append loading message to .loading-message
+    loadingMessageH2.classList.toggle(loadingMessage) 
+  }
+  
   //load list function
   function loadList() {
+    //toggleLoadingMessage;
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
+      //toggleLoadingMessage();
       json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
@@ -50,6 +64,7 @@ var pokemonRepo = (function () {
         add(pokemon);
       });
     }).catch(function (e) {
+      //toggleLoadingMessage();
       console.error(e);
     })
   }
@@ -63,6 +78,7 @@ var pokemonRepo = (function () {
       // Now we add the details to the item
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
+      item.weight = details.weight;
       item.types = details.types;
     }).catch(function (e) {
       console.error(e);
