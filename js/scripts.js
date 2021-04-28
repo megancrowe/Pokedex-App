@@ -1,5 +1,120 @@
-let pokemonRepo = (function () {
-  let repo = [
+var pokemonRepo = (function () {
+  var repo = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
+  //function to add Pokemon to repo
+  function add (pokemon) {
+    if (typeof pokemon === 'object') {
+      repo.push (pokemon);
+      console.log ('Pokemon has been added to Pokedex');
+    } else {
+      console.log ('Pokemon is not correctly entered');
+    }
+  }
+
+  //function to return all Pokemon in repo
+  function getAll () {
+    return repo;
+  }  
+
+  //function to add list item
+  function addListItem (pokemon) {
+    let pokemonList = document.querySelector('.pokemon-ul');
+    let listPokemon = document.createElement('li');
+
+    //create pokemon button
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('pokemon-button');
+
+    //append pokemon button to HTML
+    listPokemon.appendChild(button);
+    pokemonList.appendChild(listPokemon);
+
+    //event listener for button click
+    button.addEventListener('click', function (event) {
+      showDetails(pokemon);
+    });
+  };
+
+  //load list function
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+
+  //load details function
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      // Now we add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
+
+  //function to show details of list item
+  function showDetails (pokemon) {
+    pokemonRepo.loadDetails(pokemon).then(function() {
+      console.log(pokemon);
+    });
+  }
+
+  //instructions for what to return when called
+  return {
+    add: add,
+    getAll: getAll,
+    addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails,
+  }
+})();
+  
+  pokemonRepo.loadList().then(function() {
+    // Now the data is loaded!
+    pokemonRepo.getAll().forEach(function(pokemon){
+      pokemonRepo.addListItem(pokemon);
+    });
+  });
+
+
+  /*
+console.log(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
+//conditional comment on pokemon of speed 100 or greater
+(if (pokemon.speed >= 100) {
+  console.log(' - wow, that\'s fast!</br>');
+}
+else {
+  document.write('</br>')
+}
+*/
+
+
+/*
+document.querySelector('.show-more').addEventListener('click', function () {
+  document.querySelector('.additional-information')
+    .classList.toggle('is-visible');
+*/
+
+/*  Old Repository Array
+let repo = [
     {
       name: 'Ninetales',
       height: 100,
@@ -37,69 +152,4 @@ let pokemonRepo = (function () {
       speed: 85,
     }
   ]
-  
-  //function to add list item
-  function addListItem (pokemon) {
-    let pokemonList = document.querySelector('.pokemon-ul');
-    let listPokemon = document.createElement('li');
-
-    //create pokemon button
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('pokemon-button');
-
-    //append pokemon button to HTML
-    listPokemon.appendChild(button);
-    pokemonList.appendChild(listPokemon);
-
-    //event listener for button click
-    pokemon-button.addEventListener('click', function () {
-      showDetails(pokemon);
-    });
-  };
-
-    //function to show details of list item
-    function showDetails (pokemon) {
-      console.log(pokemon.name + ': height = ' + pokemon.height + ' cm; '+ 'speed = ' + pokemon.speed + '');
-      /*
-      //conditional comment on pokemon of speed 100 or greater
-      (if (pokemon.speed >= 100) {
-        console.log(' - wow, that\'s fast!</br>');
-      }
-      else {
-        document.write('</br>')
-      }
-      */
-  }
-
-  //function to add Pokemon to repo
-  function addPokemon (item) {
-    if(typeof item === ""){
-    alert ("Please enter a pokemon");
-    }
-    else repo.push(item);
-  }
-
-  //function to return all Pokemon in repo
-  function getAll () {
-    return repo;
-  }
-
-  //instructions for what to return when called
-  return {
-    getAll: getAll,
-    addPokemon: addPokemon,
-    addListItem: addListItem,
-  }
-}());
-
-
-pokemonRepo.getAll().forEach(function(pokemon) {  
-  pokemonRepo.addListItem(pokemon);
-});
-
-/*
-document.querySelector('.show-more').addEventListener('click', function () {
-  document.querySelector('.additional-information')
-    .classList.toggle('is-visible');
-*/
+  */
