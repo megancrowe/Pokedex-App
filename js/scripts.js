@@ -39,23 +39,27 @@ var pokemonRepo = (function () {
   //show loading message function
   function toggleLoadingMessage() {
     //search document for .loading-message class
-    let loadingMessageH2 = document.querySelector('.loading-message')
+    let loadingMessage = document.querySelector('.loading-message');
 
-    //create heading for loading message
-    let loadingMessage = document.createElement('<h2></h2');
-    loadingMessage.innerText = 'loading...';
-
-    //append loading message to .loading-message
-    loadingMessageH2.classList.toggle(loadingMessage) 
+    //add selected class and append .loading message to selected
+    loadingMessage.classList.toggle('selected')
   }
+
+  /*
+//hide loading message function() {
+  function hideLoadingMessage () {
+    //remove loading message from selected class
+    loadingMessage.classList.remove('selected');
+  }
+  */
   
   //load list function
   function loadList() {
-    //toggleLoadingMessage;
+    toggleLoadingMessage ();
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
-      //toggleLoadingMessage();
+      toggleLoadingMessage();
       json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
@@ -64,23 +68,26 @@ var pokemonRepo = (function () {
         add(pokemon);
       });
     }).catch(function (e) {
-      //toggleLoadingMessage();
+      toggleLoadingMessage();
       console.error(e);
     })
   }
 
   //load details function
   function loadDetails(item) {
+    toggleLoadingMessage ();
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
+      toggleLoadingMessage ();
       // Now we add the details to the item
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.weight = details.weight;
       item.types = details.types;
     }).catch(function (e) {
+      toggleLoadingMessage ();
       console.error(e);
     });
   }
