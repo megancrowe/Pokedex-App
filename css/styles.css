@@ -59,3 +59,11 @@ ul {
 .selected {
   display: block;
 }
+
+#modal-container {
+  display: none;
+}
+
+#modal-container.is-visible {
+  display: block;
+}

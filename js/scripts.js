@@ -32,7 +32,7 @@ var pokemonRepo = (function () {
 
     //event listener for button click
     button.addEventListener('click', function (event) {
-      showDetails(pokemon);
+      showModal(pokemon);
     });
   }
 
@@ -93,8 +93,10 @@ var pokemonRepo = (function () {
   }
 
   //function to show details of list item
-  function showDetails (pokemon) {
+  function showModal (pokemon) {
     pokemonRepo.loadDetails(pokemon).then(function() {
+      let modalContainer = document.querySelector('#modal-container');
+      modalContainer.classList.add('is-visible');
       console.log(pokemon);
     });
   }
@@ -106,7 +108,7 @@ var pokemonRepo = (function () {
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
-    showDetails: showDetails,
+    showModal: showModal,
   }
 })();
   
@@ -135,44 +137,3 @@ document.querySelector('.show-more').addEventListener('click', function () {
   document.querySelector('.additional-information')
     .classList.toggle('is-visible');
 */
-
-/*  Old Repository Array
-let repo = [
-    {
-      name: 'Ninetales',
-      height: 100,
-      type: ['Fire'],
-      HP: 73,
-      attack: 76,
-      defense: 75,
-      speed: 100,
-    },
-    {
-      name: 'Cubone',
-      height: 40,
-      type: ['Ground'],
-      HP: 50,
-      attack: 50,
-      defense: 95,
-      speed: 35,
-    },
-    {
-      name: 'Wobbuffet',
-      height: 130,
-      type: ['Psychic'],
-      HP: 190,
-      attack: 33,
-      defense: 58,
-      speed: 33,
-    },
-    {
-      name: 'Taillow',
-      height: 30,
-      type: ['Flying', 'Normal'],
-      HP: 40,
-      attack: 55,
-      defense: 30,
-      speed: 85,
-    }
-  ]
-  */
