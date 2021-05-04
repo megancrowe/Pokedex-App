@@ -95,7 +95,31 @@ var pokemonRepo = (function () {
   //function to show details of list item
   function showModal (pokemon) {
     pokemonRepo.loadDetails(pokemon).then(function() {
+      //search HTML for #model-container
       let modalContainer = document.querySelector('#modal-container');
+
+      //create modal div
+      let modal = document.createElement ('div');
+      modal.classList.add ('modal');
+
+      //create and activate close button 
+      let closeButton = document.createElement ('button');
+      closeButton.classList.add ('modal-close');
+      closeButton.innerText ('back');
+      closeButton.addEventListener ('click', hideModal);
+
+      //create title for modal
+      let modalTitle = document.createElement ('h1');
+      modalTitle.innerText = title;
+
+      //create content for modal
+      let modalContent = createElement ('p');
+      modalContent = text;
+
+      //append modal and content to .is-visible class
+      modal.appendChild (closeButton);
+      modal.appendChild (modalTitle);
+      modal.appendChild (modalContent);
       modalContainer.classList.add('is-visible');
       console.log(pokemon);
     });
