@@ -45,14 +45,6 @@ var pokemonRepo = (function () {
     loadingMessage.classList.toggle('selected')
   }
 
-  /*
-//hide loading message function() {
-  function hideLoadingMessage () {
-    //remove loading message from selected class
-    loadingMessage.classList.remove('selected');
-  }
-  */
-  
   //load list function
   function loadList() {
     toggleLoadingMessage ();
@@ -86,6 +78,7 @@ var pokemonRepo = (function () {
       item.height = details.height;
       item.weight = details.weight;
       item.types = details.types;
+      item.speed = details.speed;
     }).catch(function (e) {
       toggleLoadingMessage ();
       console.error(e);
@@ -95,8 +88,11 @@ var pokemonRepo = (function () {
   //function to show details of list item
   function showModal (pokemon) {
     pokemonRepo.loadDetails(pokemon).then(function() {
-      //search HTML for #model-container
+      //search HTML for #modal-container
       let modalContainer = document.querySelector('#modal-container');
+
+      //clear all existing modal content
+      modalContainer.innerHTML = '';
 
       //create modal div
       let modal = document.createElement ('div');
@@ -105,25 +101,56 @@ var pokemonRepo = (function () {
       //create and activate close button 
       let closeButton = document.createElement ('button');
       closeButton.classList.add ('modal-close');
-      closeButton.innerText ('back');
+      closeButton.innerText ='back';
       closeButton.addEventListener ('click', hideModal);
 
       //create title for modal
       let modalTitle = document.createElement ('h1');
-      modalTitle.innerText = title;
+      modalTitle.innerText = pokemon.name;
 
       //create content for modal
-      let modalContent = createElement ('p');
-      modalContent = text;
+      let modalContent = document.createElement ('p');
+      modalContent.innerHTML = 'height = ' + pokemon.height + '<br>'+ 'speed = ' + pokemon.weight 
+      //+ '<br>' + 'types = ' + pokemon.types
+      ;
+
+      // Create image element
+      let modalImage = document.createElement ('img');
+      modalImage.src = pokemon.imageUrl;
 
       //append modal and content to .is-visible class
+      modal.appendChild (modalImage);
       modal.appendChild (closeButton);
       modal.appendChild (modalTitle);
       modal.appendChild (modalContent);
-      modalContainer.classList.add('is-visible');
-      console.log(pokemon);
+      modalContainer.appendChild (modal);
+      modalContainer.classList.add ('is-visible');
+      console.log (pokemon);
     });
   }
+
+  function hideModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
+  }
+
+  //allows modal to be exited using esc key
+  window.addEventListener('keydown', (e) => {
+    let modalContainer = document.querySelector('#modal-container');
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();  
+    }
+    });
+
+  // allows modal to be exited when clicked outside modal
+  document.querySelector ('#modal-container').addEventListener('click', (e) => {
+    let modalContainer = document.querySelector ('#modal-container');
+    // disallows click to exit on modal
+    let target = e.target;
+    if (target === modalContainer) {
+    hideModal();
+    }
+  });
 
   //instructions for what to return when called
   return {
@@ -133,6 +160,7 @@ var pokemonRepo = (function () {
     loadList: loadList,
     loadDetails: loadDetails,
     showModal: showModal,
+    hideModal: hideModal,
   }
 })();
   
@@ -155,9 +183,3 @@ else {
 }
 */
 
-
-/*
-document.querySelector('.show-more').addEventListener('click', function () {
-  document.querySelector('.additional-information')
-    .classList.toggle('is-visible');
-*/
